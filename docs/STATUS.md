@@ -1,5 +1,17 @@
 # Status
 
+## 2026-11-10 — blog: "angles" post (camera angles for AI video)
+
+**Shipped:** `/blog/angles/`, the long version of the ANGLES reel ("comment ANGLES"). The
+rule (camera line first, then scene, then light), the 8 camera lines from the Studio Joe
+prompt sheet with what each is for and what went wrong in testing, plus our own additions:
+why angles matter (coverage), a lens table, how to order angles into a sequence, the
+180-degree rule for over-the-shoulder pairs, and how to animate. Lines 7 and 8 are marked
+untested, as in the sheet. Reel v12 re-encoded to 720p (6.1 MB); six stills cut from it;
+the PDF is linked at `public/blog/angles/angles-prompts.pdf`. No code change.
+
+**Needs the owner:** set `instagram` once the reel is posted.
+
 ## 2026-11-07 — blog: "earshot" post (setup guide for the SOUND reel)
 
 **Shipped:** `/blog/earshot/`, the guide promised by the reel's "comment SOUND" CTA. Written

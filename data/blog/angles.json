@@ -1,0 +1,101 @@
+{
+  "slug": "angles",
+  "kicker": "From the reel",
+  "title": "Camera angles for AI video: one scene, eight shots",
+  "dek": "Most AI video looks boring because nobody tells the model where the camera is. Here are eight camera lines to paste in front of any prompt, what each one is for, and what went wrong when we tested them.",
+  "published": "2026-11-10",
+  "instagram": null,
+  "blocks": [
+    { "type": "video", "src": "/blog/angles/reel.mp4", "poster": "/blog/angles/poster.jpg" },
+
+    { "type": "heading", "text": "The short version" },
+    { "type": "prose", "html": "You write <em>cinematic</em> in the prompt. The video still looks boring. So you add <em>8K, best quality, masterpiece</em>. It looks the same, and you have spent more credits." },
+    { "type": "prose", "html": "The problem is a line you never wrote: <b>where the camera is</b>. Leave it out and the model picks the default every time. Dead centre, eye level, the subject staring into the lens. Every clip looks like a passport photo that moves." },
+    { "type": "prose", "html": "The fix: <b>the first line of your prompt is the camera. Then the scene.</b> Keep the scene the same and change only that line, and one idea becomes eight different shots." },
+    { "type": "pair", "items": [
+      { "src": "/blog/angles/front.jpg", "alt": "A man in a black leather jacket pours chai at a rooftop table at dusk, shot straight on at eye level.", "caption": "No camera line: the default front shot." },
+      { "src": "/blog/angles/dutch.jpg", "alt": "The same man on the same rooftop, the frame tilted and the camera low, chai splashing from the glass.", "caption": "Same scene, one camera line added: <b>dutch angle</b>." }
+    ]},
+
+    { "type": "heading", "text": "Why the angle matters more than 8K" },
+    { "type": "prose", "html": "Where the camera stands tells the viewer how to feel. Look up at someone and they seem powerful. Look down and they seem small. Tilt the frame and something feels wrong. Eye level and centred says nothing at all, which is why the default reads as flat no matter how sharp it is." },
+    { "type": "prose", "html": "There is a second reason. Film-makers shoot the same scene from several set-ups, called <b>coverage</b>, so the editor has something to cut between. A cut to a new angle is what makes a sequence feel edited instead of recorded. If every AI clip comes out from the same spot, you have nothing to cut to. Eight angles of one scene is eight shots for your edit." },
+    { "type": "prose", "html": "Words like <em>8K</em> and <em>masterpiece</em> ask for quality the model already gives you. They do not say anything about the shot, so they change very little." },
+
+    { "type": "heading", "text": "How to write the prompt" },
+    { "type": "prose", "html": "Three lines, always in this order:" },
+    { "type": "steps", "items": [
+      "<code>Camera:</code> one line from the list below. Paste it first.",
+      "<code>Scene:</code> who, where, doing what.",
+      "<code>Light:</code> the time of day and where the light comes from."
+    ]},
+    { "type": "prose", "html": "The scene from the reel, with the dutch angle in front: <code>Camera: dutch angle, the whole frame tilted about 20 degrees… Scene: a man in a black leather jacket on a rooftop at dusk, pouring chai from a kettle, steam rising. Light: warm string bulbs, dusk sky.</code>" },
+    { "type": "prose", "html": "To make another shot, keep the <code>Scene</code> and <code>Light</code> lines exactly as they are and swap only the <code>Camera</code> line. Same jacket, same table, same light: the shots will look like they came from one shoot, so they cut together." },
+
+    { "type": "heading", "text": "The eight camera lines" },
+    { "type": "prose", "html": "Lines 1 to 6 made the frames in the reel. Lines 7 and 8 are new: written for this list, not yet run word for word. Each one is marked." },
+
+    { "type": "table", "title": "1 to 4", "head": ["Angle", "Use it for", "Paste as the first line"], "rows": [
+      ["1. Dutch angle <small>Tested. If the tilt comes out weak, rotate the still 15° yourself and crop in. A tilted frame is all a dutch angle is.</small>", "Drama, tension, something is off", "<code>Camera: dutch angle, the whole frame tilted about 20 degrees, camera low at table height looking slightly up, 35mm lens, the subject fills the upper two thirds of the frame, face large and sharp.</code>"],
+      ["2. Top-down <small>Tested. Write “directly above, pointing straight down”. Just “from above” gave a high angle instead.</small>", "The whole story in one frame: a table, a desk, a meal", "<code>Camera: true top-down view, the camera directly above the table pointing straight down, 35mm lens, the table top centred and filling the middle of the frame, the top of the subject's head, shoulders and arms seen from above at the bottom edge.</code>"],
+      ["3. Side profile, long lens <small>Tested. Add one or two real side photos of the person as references. A front photo alone makes the model guess the nose and jaw.</small>", "A film feel", "<code>Camera: exact 90-degree side profile, the camera level with the subject's eyes and perpendicular to the direction they face, only one eye visible, nose, lips and jaw forming a clean silhouette line, 135mm long lens from a distance, head and shoulders filling the frame, the lights and the city behind melted into big soft bokeh discs, very shallow depth of field.</code>"],
+      ["4. Close-up, three-quarter <small>Tested. A straight-on close-up is just the default shot, bigger. Turn it 45° and drop it a little below the eyes.</small>", "The reaction", "<code>Camera: tight close-up from a three-quarter angle, about 45 degrees to the subject's left side, slightly below eye level, the face filling the frame, the subject does not look at the lens, 85mm lens, shallow depth of field, warm bokeh behind.</code>"]
+    ]},
+    { "type": "pair", "items": [
+      { "src": "/blog/angles/topdown.jpg", "alt": "Seen from directly above: a steel table with a kettle, two glasses of chai and a plate of rusks, the man's head and shoulders at the bottom.", "caption": "2. Top-down." },
+      { "src": "/blog/angles/side.jpg", "alt": "The man in side profile holding a glass of chai, the city behind him blurred into soft lights.", "caption": "3. Side profile, long lens." }
+    ]},
+
+    { "type": "table", "title": "5 to 8", "head": ["Angle", "Use it for", "Paste as the first line"], "rows": [
+      ["5. Dirty frame <small>Tested. For video, lock the camera. When it moved, the leaves slid out of frame and the depth was gone.</small>", "Depth, the feeling of watching from somewhere", "<code>Camera: shot through the leaves of a potted plant very close to the lens, the leaves soft and out of focus framing the edges, the subject sharp behind them at a three-quarter angle from the side.</code>"],
+      ["6. Worm's-eye low angle <small>Tested. “Low angle” on its own came back at eye level twice. Put the camera on the floor in words, and say the reference image is for the face only.</small>", "Power, someone who towers", "<code>Camera: worm's-eye view, the camera lying on the floor a few centimetres above the ground and pointing steeply upward, 16mm wide lens, the floor huge in the near foreground, the subject towering over the frame seen from below the chin, the sky filling the top of the frame, strong upward perspective.</code>"],
+      ["7. High angle <small>New line, not yet run word for word. The frame it is based on came out of a top-down that went wrong.</small>", "Small, alone, watched", "<code>Camera: high angle from a corner above, about three metres up, looking down at 45 degrees, 24mm lens, the subject small in the middle of the space, the floor around them filling most of the frame.</code>"],
+      ["8. Over-the-shoulder <small>New line, not in this shoot: it needs two people.</small>", "Conversation, point of view", "<code>Camera: over-the-shoulder shot from just behind the first person's right shoulder, that shoulder and the back of their head soft and dark in the near foreground covering the left third of the frame, the second person sharp and facing the camera, 50mm lens, eye level.</code>"]
+    ]},
+    { "type": "pair", "items": [
+      { "src": "/blog/angles/dirty.jpg", "alt": "The man on the rooftop seen through out-of-focus leaves of a potted plant close to the lens.", "caption": "5. Dirty frame." },
+      { "src": "/blog/angles/worm.jpg", "alt": "Seen from the floor looking up: the table legs, the man's boots and the man pouring chai against the sky.", "caption": "6. Worm's-eye low angle." }
+    ]},
+
+    { "type": "note", "title": "Your reference image sets the camera too", "html": "Give the model a front-facing photo of a face and it tends to copy that camera height as well, whatever your camera line says. That is why the low angle kept coming back at eye level. Say in the prompt what each reference is for: <em>“for the face only, not the camera position”</em>." },
+    { "type": "note", "title": "A wide lens up close changes the face", "html": "16-20mm is great from the floor or for a full-body shot. Close to a face it stretches the nose and jaw, and the person stops looking like themselves. For faces, stay at 35mm or longer." },
+
+    { "type": "heading", "text": "What the millimetres mean" },
+    { "type": "prose", "html": "Every line names a lens, because the lens changes the picture as much as the angle does. You do not need to know cameras. You need one rule: <b>a small number sees more, a big number sees less</b>." },
+    { "type": "table", "head": ["Lens", "What it does", "Used in"], "rows": [
+      ["16-24mm", "Wide. Shows a lot of the place, makes things close to the lens look huge.", "Worm's-eye, high angle"],
+      ["35-50mm", "Close to how your eye sees. Natural, nothing stretched.", "Dutch, top-down, over-the-shoulder"],
+      ["85mm", "Tight on a face, background soft.", "Close-up"],
+      ["135mm", "Long. Shot from far away, background pulled close and melted into blur.", "Side profile"]
+    ]},
+
+    { "type": "heading", "text": "Turn the angles into a sequence" },
+    { "type": "prose", "html": "Eight good stills are not yet a video. This is an order that works for most short scenes. Change it when the story needs something else." },
+    { "type": "steps", "items": [
+      "<b>Open wide</b> so the viewer knows where they are: top-down or high angle.",
+      "<b>Show the action</b> from the side: side profile, or a dirty frame for depth.",
+      "<b>Cut in for the reaction</b>: the three-quarter close-up.",
+      "<b>Save the strong angles</b> for the turn in the story. A dutch angle or a worm's-eye on every shot stops meaning anything.",
+      "<b>Never cut to the same angle twice in a row.</b> It reads as a jump, not a cut."
+    ]},
+    { "type": "prose", "html": "For a conversation, the over-the-shoulder shot works in pairs: one over A's shoulder onto B, then the mirror over B's shoulder onto A. Keep the camera on the same side of the line between the two people in both shots, or they will seem to look away from each other instead of at each other. Film-makers call this the 180-degree rule." },
+
+    { "type": "heading", "text": "Making it move" },
+    { "type": "steps", "items": [
+      "Make the still first. Fix the angle there, where a retry is cheap.",
+      "Animate it from that still as the start frame, with <b>one</b> camera move and timed actions.",
+      "Keep the <code>Camera</code> line in the video prompt too, or the model can drift back to the default as it moves.",
+      "Lock the camera on a dirty frame, or the thing in front slides out of shot.",
+      "Do not slow the clip down in the edit. Slowed AI footage looks fake straight away. Plan the action to fit the length you have."
+    ]},
+    { "type": "note", "title": "Keep the face big in the frame", "html": "When the face is tiny, the model has little to copy from your reference and makes one up. If a wide shot keeps giving you a stranger, crop closer or move the camera in." },
+
+    { "type": "heading", "text": "What we tested, and what we did not" },
+    { "type": "prose", "html": "Stills were made with <b>Nano Banana 2.1</b> and clips with <b>Kling 3.0</b>, both on Higgsfield, in November 2026. Lines 1 to 6 made the frames in the reel. Line 7 is written for a high angle on purpose but has not been run word for word. Line 8 needs two people and was not in this shoot. Other models may follow camera lines more or less closely; we have not compared them." },
+    { "type": "prose", "html": "The same list as a one-page-per-angle PDF: <a href=\"/blog/angles/angles-prompts.pdf\">ANGLES prompt sheet</a> (6 pages)." }
+  ],
+  "sources": [
+    { "label": "The ANGLES reel, build.unfiltered", "date": "November 2026" },
+    { "label": "ANGLES prompt sheet (PDF)", "date": "November 2026", "url": "/blog/angles/angles-prompts.pdf" }
+  ]
+}
