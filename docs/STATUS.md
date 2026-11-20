@@ -1,5 +1,18 @@
 # Status
 
+## 2026-11-20 — blog: "linkedin" post (daily LinkedIn drafts with Claude)
+
+**Shipped:** `/blog/linkedin/`, the long version of the LinkedIn reel. The three steps
+(context, first post by hand saved as a skill, a scheduled task that saves a LinkedIn
+draft through Claude in Chrome), the task's rules, why the owner presses Post (User
+Agreement 8.2, quoted from the live page), fixes. Reel v4 re-encoded to 720p (6.2 MB).
+The Studio Joe workflow pack is linked as `public/blog/linkedin/linkedin-workflow-pack.zip`,
+with one fix: the skill upload path is Customize → Skills (Claude Help Center,
+2026-11-20), not Settings → Capabilities. The post also says browser use needs the
+desktop app open (same source). No code change.
+
+**Needs the owner:** set `instagram` once the reel link is known.
+
 ## 2026-11-10 — blog: "angles" post (camera angles for AI video)
 
 **Shipped:** `/blog/angles/`, the long version of the ANGLES reel ("comment ANGLES"). The

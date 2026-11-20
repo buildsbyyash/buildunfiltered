@@ -1,0 +1,76 @@
+{
+  "slug": "linkedin",
+  "kicker": "From the reel",
+  "title": "LinkedIn posts with Claude: teach it your voice once, then a draft every day",
+  "dek": "You learn and build something every week and post about none of it. Here is the three-step setup from the reel: give Claude your context, make the first post by hand and save it as a skill, then schedule a task that leaves a draft on LinkedIn for you to post.",
+  "published": "2026-11-20",
+  "instagram": null,
+  "blocks": [
+    { "type": "video", "src": "/blog/linkedin/reel.mp4", "poster": "/blog/linkedin/poster.jpg" },
+
+    { "type": "heading", "text": "The short version" },
+    { "type": "prose", "html": "Every day you learn something new or make something new. How many times did you post about it on LinkedIn last month? For most people the answer is zero." },
+    { "type": "prose", "html": "That matters more than it used to. On 30 September 2026 Fortune reported LinkedIn's CEO, Dan Shapero, saying job seekers send about 30% more applications than before the pandemic, and that it is harder for employers to know who can actually do the job. When every AI-written CV looks the same, <b>what you show you are learning and building</b> is what sets you apart." },
+    { "type": "prose", "html": "Nobody has time to write a post every day. So give the writing to Claude, but set it up so the post sounds like you, and so <b>you</b> press Post. Three steps, about 30 minutes once, then about a minute a day." },
+
+    { "type": "heading", "text": "Step 1. Give Claude your context" },
+    { "type": "prose", "html": "Claude can only write about your work if it knows what your work is." },
+    { "type": "steps", "items": [
+      "<b>If you already work in Claude</b> (chats, Projects, files), it already has the material. Put the work in one Project so it is all in one place.",
+      "<b>If you do not</b>, give it a reference: your notes, a doc, a link, a GitHub repo, or a short \"what I did today\" note. One running doc called <em>What I did this week</em>, with two or three lines a day, is enough.",
+      "Paste the context prompt (<code>01-context-prompt.md</code> in the pack below). It asks who you are, what you are working on, what you are learning and who you want to reach, then asks Claude for 10 post ideas from <b>your</b> material, with the 3 strongest marked. It tells Claude not to write any posts yet and not to invent projects or numbers."
+    ]},
+
+    { "type": "heading", "text": "Step 2. Make the first post by hand, then turn it into a skill" },
+    { "type": "prose", "html": "This is the step that matters most. You teach Claude your voice once, and every post after that uses it." },
+    { "type": "steps", "items": [
+      "Paste <code>02-first-post-prompt.md</code>. It asks for two versions of a first post with house rules: talk like a person, a first line that stops the scroll, one idea, one real example, short lines, under 150 words, a question at the end, 0 to 3 hashtags.",
+      "Keep changing it until <b>you</b> would post it. Short feedback works best: <em>\"Less corporate.\"</em> <em>\"Shorter.\"</em> <em>\"I'd say it like this: …\"</em> <em>\"Use my real example: …\"</em>",
+      "Optional: paste 2 or 3 posts from a creator whose style you like. Ask Claude to work out their <b>structure</b> (how they open, line length, white space, how they end) and rewrite your post with it, in your words, about your work. Never their words.",
+      "When you like it, attach <code>linkedin-post/SKILL.md</code> and ask Claude to fill it in from the conversation: the rules you followed under <em>My voice</em>, every correction you made under <em>Never do</em>, and the final post as the example.",
+      "Zip the <code>linkedin-post</code> folder. In Claude, go to <b>Customize → Skills</b>, click <b>+</b>, then <b>Create skill → Upload a skill</b>, and upload the zip."
+    ]},
+    { "type": "prose", "html": "A <b>skill</b> is a folder of instructions Claude loads when the task matches its description. Here it holds your voice, so the style is taught once and used every day." },
+
+    { "type": "heading", "text": "Step 3. Schedule it, with Claude using your browser" },
+    { "type": "prose", "html": "LinkedIn has no direct Claude connector. So Claude uses your browser the way you would, through <b>Claude in Chrome</b>." },
+    { "type": "steps", "items": [
+      "Install Claude in Chrome. Log in to LinkedIn in that Chrome yourself.",
+      "In Claude, open <b>Scheduled</b> and create a task: name it <em>Daily LinkedIn post</em>, set it daily (or Mon, Wed, Fri), pick a time.",
+      "Paste the instructions from <code>03-scheduled-task-prompt.md</code>. In short: use the linkedin-post skill; look at what you did since the last post; pick the one most interesting thing, or stop with \"Nothing new to post today\"; open LinkedIn, click <em>Start a post</em>, type it in; close the box and choose <b>Save as draft</b>.",
+      "Every day: open LinkedIn, open your drafts, read it, change what does not sound like you, press <b>Post</b>. About a minute."
+    ]},
+    { "type": "table", "title": "The rules in the scheduled task", "head": ["Rule", "Why"], "rows": [
+      ["Never click Post, Publish or Schedule on LinkedIn.", "The last click is yours. See the note below."],
+      ["Do not like, comment, connect, message or click anything else.", "The task writes one draft. Nothing else on your account changes."],
+      ["If LinkedIn asks for a login, shows a captcha or looks different, stop and say so.", "Do not let an agent work around a security check on your account."],
+      ["If there is nothing new, say \"Nothing new to post today\".", "No filler posts. A skipped day costs nothing."]
+    ]},
+    { "type": "note", "title": "Why you press Post yourself", "html": "LinkedIn's User Agreement, section 8.2 (effective 3 November 2025), lists among the things you must not do: use \"bots or other unauthorized automated methods\" to, among other things, \"create, comment on, like, share, or re-share posts\". If Claude only saves a draft, the post is created by you, with your click. Your account stays safe, and you read every post before it goes out. <b>This is our reading of the agreement, not legal advice.</b>" },
+    { "type": "note", "title": "Test the schedule before you rely on it", "html": "Claude's help centre (checked 20 November 2026) says scheduled tasks run in the cloud, even when your computer is asleep, but that <b>browser use still needs the desktop app open</b>. This task uses the browser. So set a test run 5 minutes ahead, then check two things: the draft is in LinkedIn, and whether the run worked with your laptop closed. Plan for the computer and the Claude desktop app being on at the scheduled time." },
+    { "type": "note", "title": "Never put your LinkedIn password in a prompt", "html": "Log in to Chrome yourself, once. The task only needs a browser that is already signed in." },
+
+    { "type": "heading", "text": "The first week" },
+    { "type": "prose", "html": "Read every draft carefully. Each time you change something, add the change to <code>SKILL.md</code>, under <em>Never do</em> or <em>My voice</em>. You stop making the same fix twice, and the drafts get closer to you every week." },
+    { "type": "prose", "html": "<b>AI is not writing for you. It is writing like you.</b> Everything in the post comes from your own work, and every post goes out because you read it and chose to post it." },
+
+    { "type": "heading", "text": "When it does not work" },
+    { "type": "table", "head": ["Problem", "What to do"], "rows": [
+      ["The posts sound like everyone else's", "Go back to step 2. Paste a real sentence you would say, and add the corrections to <em>Never do</em>."],
+      ["The task invents a project or a number", "Point it at one notes doc or one Project, and keep the skill's line: never invent projects, numbers, clients or results."],
+      ["The scheduled run did nothing", "Check that the Claude desktop app was open and the computer was awake. Browser use needs both."],
+      ["LinkedIn asks Claude to log in", "Log in to LinkedIn in that Chrome yourself, then run the task again."],
+      ["Nothing new to post today, every day", "Your context is empty. Drop two or three lines a day into your notes doc."]
+    ]},
+
+    { "type": "heading", "text": "The pack" },
+    { "type": "prose", "html": "Every prompt above, word for word, plus the empty skill template: <a href=\"/blog/linkedin/linkedin-workflow-pack.zip\">LinkedIn workflow pack</a> (zip, 5 files). Start with <code>00-START-HERE.md</code>." }
+  ],
+  "sources": [
+    { "label": "Fortune: LinkedIn CEO Dan Shapero says job seekers are sending out 30% more applications than pre-pandemic, and it's harder to know who can do the job", "date": "2026-09-30", "url": "https://fortune.com/2026/09/30/linkedin-ceo-dan-shapero-says-job-seekers-sending-out-30-more-applications-pre-pandemic-harder-know-who-can-do-job/" },
+    { "label": "LinkedIn User Agreement, section 8.2 (effective 3 November 2025)", "date": "2026-11-20", "url": "https://www.linkedin.com/legal/user-agreement" },
+    { "label": "Claude Help Center: Using skills in Claude", "date": "2026-11-20", "url": "https://support.claude.com/en/articles/12512180-using-skills-in-claude" },
+    { "label": "Claude Help Center: Schedule recurring tasks", "date": "2026-11-20", "url": "https://support.claude.com/en/articles/13854387-schedule-recurring-tasks-in-claude-cowork" },
+    { "label": "LinkedIn workflow pack (zip), made by Studio Joe", "date": "2026-11-19", "url": "/blog/linkedin/linkedin-workflow-pack.zip" }
+  ]
+}
