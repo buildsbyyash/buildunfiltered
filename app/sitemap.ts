@@ -10,6 +10,8 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${site.url}/`, changeFrequency: "hourly", priority: 1 },
     { url: `${site.url}/watch/`, changeFrequency: "hourly", priority: 0.8 },
     { url: `${site.url}/blog/`, changeFrequency: "weekly", priority: 0.7 },
+    { url: `${site.url}/learn/`, changeFrequency: "monthly", priority: 0.7 },
+    { url: `${site.url}/learn/ai-agents/`, changeFrequency: "monthly", priority: 0.7 },
     ...posts.map((p) => ({ url: `${site.url}/blog/${p.slug}/`, lastModified: p.published, priority: 0.6 })),
     ...videos.map((v) => ({ url: `${site.url}/watch/${v.id}/`, lastModified: v.published, priority: 0.4 })),
   ];
