@@ -13,7 +13,7 @@ const PAGES = [
     href: "/learn/ai-agents/",
     n: "01",
     title: "How AI agents work",
-    dek: "From a model that guesses the next word to an agent that finds you jobs every morning. Nine stops, no code.",
+    dek: "From a model that guesses the next word to an agent that finds you jobs every morning. Ten stops, no code.",
   },
 ];
 

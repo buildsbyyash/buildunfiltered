@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-/* How AI agents work: nine stops, each with one thing to play with.
+/* How AI agents work: ten stops, each with one thing to play with.
    Teaching page for the agentic AI masterclass. Plain words, no code.
    Every number that comes from the real world carries its source and date
    (see SOURCES at the bottom); illustrations are labelled as illustrations. */
@@ -10,12 +10,13 @@ const STOPS = [
   { id: "llm", n: "01", label: "The brain" },
   { id: "tokens", n: "02", label: "Tokens" },
   { id: "context", n: "03", label: "Context window" },
-  { id: "memory", n: "04", label: "Memory" },
-  { id: "tools", n: "05", label: "Tools" },
-  { id: "autonomy", n: "06", label: "Autonomy" },
-  { id: "workflow", n: "07", label: "Workflow or agent" },
-  { id: "build", n: "08", label: "Today's build" },
-  { id: "cost", n: "09", label: "What it costs" },
+  { id: "agent", n: "04", label: "What is an AI agent" },
+  { id: "memory", n: "05", label: "Memory" },
+  { id: "tools", n: "06", label: "Tools" },
+  { id: "autonomy", n: "07", label: "Autonomy" },
+  { id: "workflow", n: "08", label: "Workflow or agent" },
+  { id: "build", n: "09", label: "Today's build" },
+  { id: "cost", n: "10", label: "What it costs" },
 ];
 
 export default function AgentsExplainer() {
@@ -52,7 +53,7 @@ export default function AgentsExplainer() {
         <h1 className="finder-title">How AI agents work</h1>
         <p className="finder-lede">
           From a model that guesses the next word to an agent that finds you jobs every morning.
-          Nine stops, no code. Each stop has something to press.
+          Ten stops, no code. Each stop has something to press.
         </p>
         <ol className="lx-index">
           {STOPS.map((s) => (
@@ -85,37 +86,43 @@ export default function AgentsExplainer() {
         <Desk />
       </Stop>
 
-      <Stop id="memory" n="04" kicker="Remembering" title="Two kinds of memory"
+      <Stop id="agent" n="04" kicker="Putting it together" title="What is an AI agent?"
+        lede="An LLM on its own can only talk. An AI agent is an LLM that can get things done: you give it a goal, and it works step by step, using tools and memory, until the job is finished."
+        take="Agent = LLM + memory + tools + autonomy. The LLM is the brain you have already met. The next three stops take the other parts one at a time.">
+        <AgentIntro />
+      </Stop>
+
+      <Stop id="memory" n="05" kicker="Remembering" title="Two kinds of memory"
         lede="Short-term memory is the desk: this conversation only. Long-term memory is a filing cabinet: notes saved somewhere permanent, like a sheet or a database, that the agent can look up later, even in a brand new chat."
         take="The model itself does not remember you. Memory is always something we build around it: what we put on the desk, and what we save and fetch later.">
         <Memory />
       </Stop>
 
-      <Stop id="tools" n="05" kicker="The hands" title="Tools are its hands"
+      <Stop id="tools" n="06" kicker="The hands" title="Tools are its hands"
         lede="A tool is an ability you hand the model: search jobs, read a file, save a row, send a message. You describe each tool in plain words. The model reads those descriptions and decides on its own which tool to use, and when."
         take="Nobody wrote “if there are too few jobs, search again”. The model decided that from what came back. That loop (decide, use a tool, look at the result, repeat) is what makes it an agent.">
         <ToolRun />
       </Stop>
 
-      <Stop id="autonomy" n="06" kicker="Who decides" title="Autonomy: who picks the next step?"
+      <Stop id="autonomy" n="07" kicker="Who decides" title="Autonomy: who picks the next step?"
         lede="Not every AI system should make its own decisions. Slide through the levels, using the same job search each time."
         take="More autonomy means it can handle more, and you can predict less. Use the lowest level that does the job, and keep a human check before anything that cannot be undone.">
         <Autonomy />
       </Stop>
 
-      <Stop id="workflow" n="07" kicker="The test" title="Workflow or agent?"
+      <Stop id="workflow" n="08" kicker="The test" title="Workflow or agent?"
         lede="One question decides it: can you draw the flowchart before it runs? If yes, it is a workflow, and you should build it as one, because it is cheaper, faster and easier to fix. Use an agent only where the next step depends on what it finds."
         take="Good systems mix the two: a workflow on the outside, and an agent only for the step that needs judgement.">
         <Versus />
       </Stop>
 
-      <Stop id="build" n="08" kicker="The demo" title="Today's build: a job hunter that runs every morning"
+      <Stop id="build" n="09" kicker="The demo" title="Today's build: a job hunter that runs every morning"
         lede="Three small n8n workflows. Each one starts in a different way, and each one shows an idea from this page. Tap a box to see what it does."
         take="Three ways a workflow can start: on a schedule, when another workflow calls it, or when something happens (like you tapping a button).">
         <Build />
       </Stop>
 
-      <Stop id="cost" n="09" kicker="The bill" title="What it costs"
+      <Stop id="cost" n="10" kicker="The bill" title="What it costs"
         lede="You pay for tokens in and tokens out. Agents use more than people expect, because every step sends the whole conversation so far again."
         take="For one person, one run a day costs very little. The bill grows with more steps, longer pages on the desk, bigger models and more runs. Always put a limit on the number of steps.">
         <Cost />
@@ -294,7 +301,66 @@ function Desk() {
   );
 }
 
-/* ---------------- 04: memory ---------------- */
+/* ---------------- 04: what is an agent ---------------- */
+const AGENT_STEPS = [
+  "Reads your résumé: React, 2 years, Bangalore",
+  "Searches job listings for “React developer, Bangalore, this week”",
+  "Drops two that ask for 6+ years",
+  "Searches again with “Frontend engineer” to find a third",
+];
+const AGENT_JOBS = [
+  "Frontend Developer (React) · Acme Pay · posted 2 days ago",
+  "React Engineer · Nimbus Labs · posted 4 days ago",
+  "Frontend Engineer · Kitefin · posted yesterday",
+];
+const PARTS = [
+  { name: "LLM", role: "the brain", href: "#llm", where: "stops 01 to 03" },
+  { name: "Memory", role: "what it remembers", href: "#memory", where: "stop 05" },
+  { name: "Tools", role: "what it can do", href: "#tools", where: "stop 06" },
+  { name: "Autonomy", role: "who decides the steps", href: "#autonomy", where: "stop 07" },
+];
+function AgentIntro() {
+  const [mode, setMode] = useState<"llm" | "agent">("llm");
+  return (
+    <div>
+      <p className="lx-goal"><span className="mono">You ask</span> Find me 3 React jobs in Bangalore posted this week.</p>
+      <div className="lx-ticks lx-ticks-2">
+        <button className={mode === "llm" ? "on" : ""} onClick={() => setMode("llm")}>LLM on its own</button>
+        <button className={mode === "agent" ? "on" : ""} onClick={() => setMode("agent")}>AI agent</button>
+      </div>
+      {mode === "llm" ? (
+        <div className="lx-box lx-reply">
+          <p className="mono lx-box-h">It replies</p>
+          <p>“I can't search job sites or see this week's listings. I only know what was in my training. Here are some tips: keep your profile updated, search for ‘React developer’ on job boards, and set up alerts.”</p>
+          <p className="lx-note">Helpful words, but the job is not done. It cannot look anything up or act.</p>
+        </div>
+      ) : (
+        <div className="lx-box lx-reply">
+          <p className="mono lx-box-h">It works through steps</p>
+          <ol className="lx-steps">{AGENT_STEPS.map((x) => <li key={x}>{x}</li>)}</ol>
+          <p className="mono lx-box-h" style={{ marginTop: 14 }}>Then replies</p>
+          <ul className="lx-jobs">{AGENT_JOBS.map((x) => <li key={x}>{x}</li>)}</ul>
+          <p className="lx-note">Same brain underneath. The difference is everything built around it. Company names are made up.</p>
+        </div>
+      )}
+      <p className="mono lx-box-h" style={{ marginTop: 22 }}>An agent is four parts</p>
+      <div className="lx-formula">
+        {PARTS.map((pt, i) => (
+          <span key={pt.name} className="lx-formula-item">
+            {i > 0 && <i aria-hidden>+</i>}
+            <a href={pt.href} className="lx-part">
+              <b>{pt.name}</b>
+              <span>{pt.role}</span>
+              <span className="mono">{pt.where}</span>
+            </a>
+          </span>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ---------------- 05: memory ---------------- */
 const MEM_STEPS = [
   { say: "Monday. You chat with the agent and it finds you three jobs. All of this sits on the desk.", desk: ["You: find me React jobs", "Agent: here are 3 jobs"], cab: ["Résumé: React, 2 years, Bangalore"] },
   { say: "Before the chat ends, it saves what it sent into the filing cabinet.", desk: ["You: find me React jobs", "Agent: here are 3 jobs"], cab: ["Résumé: React, 2 years, Bangalore", "Sent on Monday: Acme Pay, Nimbus Labs, Kitefin"] },
@@ -326,7 +392,7 @@ function Memory() {
   );
 }
 
-/* ---------------- 05: tools ---------------- */
+/* ---------------- 06: tools ---------------- */
 const TOOLS = [
   { id: "resume", name: "Read résumé", desc: "Reads the person's résumé: skills, years, city." },
   { id: "search", name: "Search jobs", desc: "Searches job listings for a title and a city." },
@@ -386,7 +452,7 @@ function ToolRun() {
   );
 }
 
-/* ---------------- 06: autonomy ---------------- */
+/* ---------------- 07: autonomy ---------------- */
 const LEVELS = [
   { name: "Chatbot", what: "You ask, it answers. It cannot do anything in the world.", job: "Gives you tips on how to look for jobs.", who: "You, every single time.", predict: "Very predictable." },
   { name: "Workflow with AI in one step", what: "You fixed the steps in advance. AI does one of them, like writing a summary.", job: "Every day at 9: search “React developer”, AI writes a summary, email it to you.", who: "You, ahead of time.", predict: "Very predictable. Same steps, same cost, every run." },
@@ -414,7 +480,7 @@ function Autonomy() {
   );
 }
 
-/* ---------------- 07: workflow vs agent ---------------- */
+/* ---------------- 08: workflow vs agent ---------------- */
 function Versus() {
   const [run, setRun] = useState(false);
   const wf = ["Search “React developer”", "Save every result", "Email the list"];
@@ -452,25 +518,25 @@ function Versus() {
   );
 }
 
-/* ---------------- 08: the build ---------------- */
+/* ---------------- 09: the build ---------------- */
 const FLOWS = [
   {
     n: "1", name: "Job Hunter", trig: "Every day at 9:00", trigKind: "On a schedule",
     nodes: ["Schedule", "AI agent", "Call Verifier"],
     does: "An AI agent with four tools: read résumé, search jobs, check saved jobs, save job. Its instructions give it a goal, not steps: find up to 5 new jobs that fit, and never repeat one.",
-    shows: "Tools (stop 05), long-term memory in the sheet (stop 04), autonomy (stop 06).",
+    shows: "Tools (stop 06), long-term memory in the sheet (stop 05), autonomy (stop 07).",
   },
   {
     n: "2", name: "Verifier", trig: "Called by the Job Hunter", trigKind: "By another workflow",
     nodes: ["Called", "AI agent", "Telegram: Yes / No"],
     does: "A second agent opens each job, scores how well it fits from 1 to 10 and gives a reason. Jobs scoring 7 or more go to your Telegram with two buttons: Yes and No.",
-    shows: "A second opinion on the first agent's work, and the workflow around the agent (stop 07).",
+    shows: "A second opinion on the first agent's work, and the workflow around the agent (stop 08).",
   },
   {
     n: "3", name: "Responder", trig: "You tap Yes or No", trigKind: "When something happens",
     nodes: ["Telegram tap", "Yes or No?", "Update the sheet"],
     does: "Yes marks the job approved in the sheet. No marks it rejected. This is where you would carry on: draft a cover note, add a reminder, anything.",
-    shows: "A human check before anything that matters (stop 06).",
+    shows: "A human check before anything that matters (stop 07).",
   },
 ];
 function Build() {
@@ -496,7 +562,7 @@ function Build() {
   );
 }
 
-/* ---------------- 09: cost ---------------- */
+/* ---------------- 10: cost ---------------- */
 function Cost() {
   const steps = [1500, 2400, 3300, 4300, 5200, 6100]; // illustration: each step re-sends everything before it
   const max = steps[steps.length - 1];

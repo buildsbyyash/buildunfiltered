@@ -593,3 +593,20 @@ body:has(.watch) .head-inner { max-width:1680px; }
 .lx.presenting .lx-lede { font-size:1.2rem; }
 .lx.presenting .lx-title { font-size:clamp(2.4rem,5vw,3.6rem); }
 @media (max-width:640px) { .lx-stop { padding-top:48px; } .lx-panel { padding:16px; } .lx-ticks { grid-template-columns:1fr 1fr; } }
+
+/* 04 what is an agent */
+.lx-ticks-2 { grid-template-columns:1fr 1fr; max-width:420px; margin:0 0 12px; }
+.lx-reply p:not(.lx-box-h):not(.lx-note) { margin:4px 0; font-size:.95rem; }
+.lx-steps { margin:0; padding-left:20px; font-size:.92rem; color:var(--ink-2); }
+.lx-steps li { margin:4px 0; }
+.lx-jobs { list-style:none; margin:0; padding:0; }
+.lx-jobs li { padding:8px 10px; margin-top:6px; background:var(--surface-2); border:1px solid var(--rule); box-shadow:inset 3px 0 0 var(--ok); font-size:.92rem; }
+.lx-formula { display:flex; flex-wrap:wrap; align-items:stretch; gap:8px; }
+.lx-formula-item { display:flex; align-items:center; gap:8px; }
+.lx-formula-item i { font-style:normal; font-family:var(--display); font-weight:700; font-size:1.6rem; color:var(--ox-hi); }
+.lx-part { display:flex; flex-direction:column; gap:2px; padding:12px 16px; min-width:150px; background:var(--bg); border:1px solid var(--rule); text-decoration:none; color:var(--ink); }
+.lx-part:hover { border-color:var(--ox-hi); }
+.lx-part b { font-family:var(--display); font-weight:700; text-transform:uppercase; font-size:1.3rem; letter-spacing:.02em; }
+.lx-part span { font-size:.85rem; color:var(--ink-2); }
+.lx-part .mono { font-size:10px; letter-spacing:.12em; text-transform:uppercase; color:var(--muted); }
+@media (max-width:640px) { .lx-formula-item { width:100%; } .lx-formula-item i { width:14px; } .lx-formula-item:first-child { padding-left:22px; } .lx-part { flex:1; } }
