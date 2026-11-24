@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useMemo, useRef, useState } from "react";
 
-/* How AI agents work: ten stops, each with one thing to play with.
-   Teaching page for the agentic AI masterclass. Plain words, no code.
+/* How AI agents work: eight stops, each with one thing to play with.
+   Plain words, no code.
    Every number that comes from the real world carries its source and date
    (see SOURCES at the bottom); illustrations are labelled as illustrations. */
 
@@ -15,8 +15,6 @@ const STOPS = [
   { id: "tools", n: "06", label: "Tools" },
   { id: "autonomy", n: "07", label: "Autonomy" },
   { id: "workflow", n: "08", label: "Workflow or agent" },
-  { id: "build", n: "09", label: "Today's build" },
-  { id: "cost", n: "10", label: "What it costs" },
 ];
 
 export default function AgentsExplainer() {
@@ -53,7 +51,7 @@ export default function AgentsExplainer() {
         <h1 className="finder-title">How AI agents work</h1>
         <p className="finder-lede">
           From a model that guesses the next word to an agent that finds you jobs every morning.
-          Ten stops, no code. Each stop has something to press.
+          Eight stops, no code. Each stop has something to press.
         </p>
         <ol className="lx-index">
           {STOPS.map((s) => (
@@ -116,22 +114,9 @@ export default function AgentsExplainer() {
         <Versus />
       </Stop>
 
-      <Stop id="build" n="09" kicker="The demo" title="Today's build: a job hunter that runs every morning"
-        lede="Three small n8n workflows. Each one starts in a different way, and each one shows an idea from this page. Tap a box to see what it does."
-        take="Three ways a workflow can start: on a schedule, when another workflow calls it, or when something happens (like you tapping a button).">
-        <Build />
-      </Stop>
-
-      <Stop id="cost" n="10" kicker="The bill" title="What it costs"
-        lede="You pay for tokens in and tokens out. Agents use more than people expect, because every step sends the whole conversation so far again."
-        take="For one person, one run a day costs very little. The bill grows with more steps, longer pages on the desk, bigger models and more runs. Always put a limit on the number of steps.">
-        <Cost />
-      </Stop>
-
       <section className="wrap lx-sources">
         <h2>Sources</h2>
         <ul>
-          <li>GPT-5 mini price ($0.25 per million input tokens, $2.00 per million output tokens): <a href="https://developers.openai.com/api/docs/models/gpt-5-mini" rel="noopener">OpenAI model page</a>, checked 22 Nov 2026.</li>
           <li>Token splits on stop 02: <a href="https://github.com/niieani/gpt-tokenizer" rel="noopener">gpt-tokenizer</a>, using o200k_base, the tokeniser OpenAI uses for GPT-5 mini.</li>
           <li>Everything marked “illustration” is made up to show an idea, not measured.</li>
         </ul>
@@ -514,97 +499,6 @@ function Versus() {
         </tbody>
       </table>
       <p className="lx-note">Illustration. Results are made up to show the difference.</p>
-    </div>
-  );
-}
-
-/* ---------------- 09: the build ---------------- */
-const FLOWS = [
-  {
-    n: "1", name: "Job Hunter", trig: "Every day at 9:00", trigKind: "On a schedule",
-    nodes: ["Schedule", "AI agent", "Call Verifier"],
-    does: "An AI agent with four tools: read résumé, search jobs, check saved jobs, save job. Its instructions give it a goal, not steps: find up to 5 new jobs that fit, and never repeat one.",
-    shows: "Tools (stop 06), long-term memory in the sheet (stop 05), autonomy (stop 07).",
-  },
-  {
-    n: "2", name: "Verifier", trig: "Called by the Job Hunter", trigKind: "By another workflow",
-    nodes: ["Called", "AI agent", "Telegram: Yes / No"],
-    does: "A second agent opens each job, scores how well it fits from 1 to 10 and gives a reason. Jobs scoring 7 or more go to your Telegram with two buttons: Yes and No.",
-    shows: "A second opinion on the first agent's work, and the workflow around the agent (stop 08).",
-  },
-  {
-    n: "3", name: "Responder", trig: "You tap Yes or No", trigKind: "When something happens",
-    nodes: ["Telegram tap", "Yes or No?", "Update the sheet"],
-    does: "Yes marks the job approved in the sheet. No marks it rejected. This is where you would carry on: draft a cover note, add a reminder, anything.",
-    shows: "A human check before anything that matters (stop 07).",
-  },
-];
-function Build() {
-  const [open, setOpen] = useState(0);
-  return (
-    <div>
-      <div className="lx-flows">
-        {FLOWS.map((f, i) => (
-          <button key={f.n} className={`lx-flowcard${open === i ? " on" : ""}`} onClick={() => setOpen(i)} aria-expanded={open === i}>
-            <span className="mono lx-trig">{f.trigKind}</span>
-            <b>{f.n}. {f.name}</b>
-            <span className="lx-chain">{f.nodes.map((x, j) => <span key={x}>{x}{j < f.nodes.length - 1 ? <i aria-hidden> → </i> : null}</span>)}</span>
-          </button>
-        ))}
-      </div>
-      <div className="lx-detail">
-        <p><span className="mono">Starts</span> {FLOWS[open].trig}</p>
-        <p><span className="mono">Does</span> {FLOWS[open].does}</p>
-        <p><span className="mono">Shows</span> {FLOWS[open].shows}</p>
-      </div>
-      <p className="lx-note">Built in n8n, a no-code automation tool. Job listings come from Adzuna's free jobs API. The n8n template and a step-by-step setup guide will be linked here.</p>
-    </div>
-  );
-}
-
-/* ---------------- 10: cost ---------------- */
-function Cost() {
-  const steps = [1500, 2400, 3300, 4300, 5200, 6100]; // illustration: each step re-sends everything before it
-  const max = steps[steps.length - 1];
-  const total = steps.reduce((a, b) => a + b, 0);
-  const [inTok, setInTok] = useState(20000);
-  const [outTok, setOutTok] = useState(2000);
-  const [runs, setRuns] = useState(1);
-  const [pIn, setPIn] = useState(0.25);
-  const [pOut, setPOut] = useState(2.0);
-  const [inr, setInr] = useState("");
-  const perRun = (inTok * pIn + outTok * pOut) / 1e6;
-  const perMonth = perRun * runs * 30;
-  const rate = parseFloat(inr);
-  const fmt = (usd: number) => `$${usd < 0.1 ? usd.toFixed(4) : usd.toFixed(2)}`;
-  return (
-    <div>
-      <p className="mono lx-box-h">Tokens sent at each step of one run (illustration)</p>
-      <div className="lx-bars">
-        {steps.map((s, i) => (
-          <div key={i} className="lx-bar-row">
-            <span className="mono">Step {i + 1}</span>
-            <span className="lx-bar"><span style={{ width: `${(s / max) * 100}%` }} /></span>
-            <span className="mono">{s.toLocaleString("en-IN")}</span>
-          </div>
-        ))}
-      </div>
-      <p className="lx-note">The last step alone sends {max.toLocaleString("en-IN")} tokens. The whole run sends {total.toLocaleString("en-IN")}. Twice the steps costs far more than twice as much.</p>
-
-      <div className="lx-calc">
-        <label><span className="mono">Input tokens per run</span><input type="number" min={0} value={inTok} onChange={(e) => setInTok(+e.target.value)} /></label>
-        <label><span className="mono">Output tokens per run</span><input type="number" min={0} value={outTok} onChange={(e) => setOutTok(+e.target.value)} /></label>
-        <label><span className="mono">Runs per day</span><input type="number" min={0} value={runs} onChange={(e) => setRuns(+e.target.value)} /></label>
-        <label><span className="mono">$ per million input</span><input type="number" min={0} step={0.01} value={pIn} onChange={(e) => setPIn(+e.target.value)} /></label>
-        <label><span className="mono">$ per million output</span><input type="number" min={0} step={0.01} value={pOut} onChange={(e) => setPOut(+e.target.value)} /></label>
-        <label><span className="mono">₹ per $ (optional)</span><input type="number" min={0} step={0.01} placeholder="today's rate" value={inr} onChange={(e) => setInr(e.target.value)} /></label>
-      </div>
-      <div className="lx-stats">
-        <div><b className="mono">{fmt(perRun)}</b><span>per run</span></div>
-        <div><b className="mono">{fmt(perMonth)}</b><span>per month</span></div>
-        {rate > 0 && <div><b className="mono">₹{(perMonth * rate).toFixed(2)}</b><span>per month</span></div>}
-      </div>
-      <p className="lx-note">Prices are pre-filled with GPT-5 mini's list price, checked 22 Nov 2026 (source below). The token counts are an example. Change any box.</p>
     </div>
   );
 }
